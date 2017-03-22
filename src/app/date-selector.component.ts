@@ -38,4 +38,20 @@ export class DateSelectorComponent {
         d.setDate(d.getDate() + offset);
         return d;
     }
+
+    get htmlDate(): string {
+        return this.selectedDate.toISOString().substring(0, 10);
+    }
+
+    set htmlDate(s: string) {
+        let parts: string[] = s.split("-");
+        let d: Date = new Date(Date.UTC(parseInt(parts[0]),     // Year
+                                        parseInt(parts[1])-1,   // Month
+                                        parseInt(parts[2])));   // Day
+        this.selectedDate.setFullYear(d.getUTCFullYear(),
+                                      d.getUTCMonth(),
+                                      d.getUTCDate());
+        this.selectedDate = this.normalizeDate(this.selectedDate);
+    }
+
 }   // class DateSelectorComponent
