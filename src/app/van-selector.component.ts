@@ -33,6 +33,7 @@ export class VanSelectorComponent implements OnInit {
         this.vanService.getVans().then( vans => {
             this.vans = vans;
             this.selectedVan = this.vans[0];
+            this.onVanSelected.emit(this.selectedVan.id);
         });
     }
 
@@ -40,7 +41,6 @@ export class VanSelectorComponent implements OnInit {
         for (let i: number = 0; i < this.vans.length; i++) {
             if (this.vans[i].id == vanId) {
                 this.selectedVan = this.vans[i];
-                console.log("Selected " + this.selectedVan.display);
                 this.onVanSelected.emit(this.selectedVan.id);
                 return;
             }
