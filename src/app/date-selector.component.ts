@@ -36,6 +36,9 @@ export class DateSelectorComponent {
                 break;
         }
         d.setDate(d.getDate() + offset);
+
+        d = new  Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+
         return d;
     }
 
