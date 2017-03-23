@@ -5,16 +5,19 @@ import { Component } from '@angular/core';
     template: `
         <label>Date: </label>
         <input type="date" [(ngModel)]="htmlDate" name="selectedDate">
+        <span>{{selectedDay}}
     `
 })
 export class DateSelectorComponent {
     selectedDate: Date;
+    selectedDay: string;
 
     constructor() {
         this.selectedDate = this.normalizeDate(new Date());
+        this.selectedDay = this.getDay(this.selectedDate);
     }
 
-    normalizeDate(d: Date): Date {
+    private normalizeDate(d: Date): Date {
         let offset: number = 0;
         switch (d.getDay()) {
             case 1: // Monday
@@ -42,6 +45,20 @@ export class DateSelectorComponent {
         return d;
     }
 
+    private getDay(d: Date): string {
+        let abbrev: string = d.toUTCString().substr(0, 3);
+        switch (abbrev) {
+            case "Sun": return "Sunday";
+            case "Mon": return "Monday";
+            case "Tue": return "Tuesday";
+            case "Wed": return "Wednesday";
+            case "Thu": return "Thursday";
+            case "Fri": return "Friday";
+            case "Sat": return "Saturday";
+            default: return d.toUTCString().substr(0, 3);
+        }
+    }
+
     get htmlDate(): string {
         return this.selectedDate.toISOString().substring(0, 10);
     }
@@ -55,6 +72,7 @@ export class DateSelectorComponent {
                                       d.getUTCMonth(),
                                       d.getUTCDate());
         this.selectedDate = this.normalizeDate(this.selectedDate);
+        this.selectedDay = this.getDay(this.selectedDate);
     }
 
 }   // class DateSelectorComponent
