@@ -54,12 +54,12 @@ export class RidersComponent  {
         this.vanId = id;
     }
 
-    private _getRiders(vanId: number): void {
-        this.riderService.getRiders(vanId).then(riders => this.riders = riders);
+    private _getRiders(vanId: number, day: number): void {
+        this.riderService.getRiders(vanId, day).then(riders => this.riders = riders);
     }
 
-    public selectVan(id: number) {
+    public selectVan(id: number, day: number) {
         console.log("riders.component: van " + id + " selected")
-        this._getRiders(id);
+        this._getRiders(id, day);
     }
 }   // class AppComponent
