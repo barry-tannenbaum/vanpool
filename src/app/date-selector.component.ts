@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'date-selector',
@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 export class DateSelectorComponent {
     selectedDate: Date;
     selectedDay: string;
+    @Output() onDateSelected = new EventEmitter<number>();
 
     constructor() {
         this.selectedDate = this.normalizeDate(new Date());
@@ -73,6 +74,7 @@ export class DateSelectorComponent {
                                       d.getUTCDate());
         this.selectedDate = this.normalizeDate(this.selectedDate);
         this.selectedDay = this.getDay(this.selectedDate);
+        this.onDateSelected.emit(this.selectedDate.getUTCDay());
     }
 
 }   // class DateSelectorComponent

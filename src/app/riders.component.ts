@@ -59,7 +59,7 @@ export class RidersComponent  {
     }
 
     public selectVan(id: number, day: number) {
-        console.log("riders.component: van " + id + " selected")
+        console.log("riders.component: van " + id + ", day: " + day + " selected")
         this._getRiders(id, day);
     }
 }   // class AppComponent
